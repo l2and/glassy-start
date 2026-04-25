@@ -1,0 +1,18 @@
+/* Greeting card — scoped to this iframe */
+
+body.card-body--start .greeting-card {
+  justify-content: center;
+}
+
+.greeting-card {
+  width: 100%;
+}
+
+.greeting-line {
+  margin: 0;
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.94);
+}

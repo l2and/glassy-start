@@ -1,0 +1,56 @@
+/* Grid / layout for the start page */
+
+.card-grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  grid-template-columns: repeat(12, 1fr);
+  max-width: 1120px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.card-grid > .glass-card {
+  grid-column: span 12;
+  min-height: 140px;
+}
+
+.glass-card[data-card-id="greeting"] {
+  min-height: 128px;
+}
+
+.glass-card[data-card-id="clock"] {
+  min-height: 160px;
+}
+
+.glass-card[data-card-id="clock-weather"] {
+  /* Avatar crop 100px + ring + controls */
+  min-height: clamp(320px, 46vw, 420px);
+}
+
+.glass-card[data-card-id="bookmarks"] {
+  min-height: 260px;
+}
+
+@media (min-width: 720px) {
+  .card-grid > .glass-card[data-span="half"] {
+    grid-column: span 6;
+  }
+
+  .card-grid > .glass-card[data-span="full"] {
+    grid-column: span 12;
+  }
+}
+
+@media (min-width: 960px) {
+  .card-grid > .glass-card[data-span="wide"] {
+    grid-column: span 8;
+  }
+
+  .card-grid > .glass-card[data-span="narrow"] {
+    grid-column: span 4;
+  }
+
+  .card-grid > .glass-card[data-span="half"] {
+    min-height: 200px;
+  }
+}

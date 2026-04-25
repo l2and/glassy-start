@@ -1,0 +1,200 @@
+/* Core glassmorphism tokens and utilities */
+
+:root {
+  /* Circadian background (overwritten by js/circadian.js) */
+  --circ-grad-a-r: 8;
+  --circ-grad-a-g: 14;
+  --circ-grad-a-b: 42;
+  --circ-grad-b-r: 28;
+  --circ-grad-b-g: 12;
+  --circ-grad-b-b: 58;
+  --circ-m1-r: 55;
+  --circ-m1-g: 85;
+  --circ-m1-b: 200;
+  --circ-m2-r: 110;
+  --circ-m2-g: 35;
+  --circ-m2-b: 170;
+  --circ-m3-r: 15;
+  --circ-m3-g: 95;
+  --circ-m3-b: 125;
+  --circ-mesh-strength: 0.62;
+
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-hover: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-hover: rgba(255, 255, 255, 0.35);
+  --glass-blur: 18px;
+  --glass-radius: 20px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-muted: rgba(255, 255, 255, 0.78);
+
+  --transition-card: 0.22s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  transition:
+    --circ-grad-a-r 3.5s ease,
+    --circ-grad-a-g 3.5s ease,
+    --circ-grad-a-b 3.5s ease,
+    --circ-grad-b-r 3.5s ease,
+    --circ-grad-b-g 3.5s ease,
+    --circ-grad-b-b 3.5s ease,
+    --circ-m1-r 3.5s ease,
+    --circ-m1-g 3.5s ease,
+    --circ-m1-b 3.5s ease,
+    --circ-m2-r 3.5s ease,
+    --circ-m2-g 3.5s ease,
+    --circ-m2-b 3.5s ease,
+    --circ-m3-r 3.5s ease,
+    --circ-m3-g 3.5s ease,
+    --circ-m3-b 3.5s ease,
+    --circ-mesh-strength 3.5s ease;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Deep animated mesh background */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    125deg,
+    rgb(var(--circ-grad-a-r), var(--circ-grad-a-g), var(--circ-grad-a-b)) 0%,
+    rgb(var(--circ-grad-b-r), var(--circ-grad-b-g), var(--circ-grad-b-b)) 44%,
+    rgb(var(--circ-grad-b-r), var(--circ-grad-b-g), var(--circ-grad-b-b)) 58%,
+    rgb(var(--circ-grad-a-r), var(--circ-grad-a-g), var(--circ-grad-a-b)) 100%
+  );
+  background-size: 400% 400%;
+  animation: bg-shift 28s ease-in-out infinite alternate;
+}
+
+@keyframes bg-shift {
+  0% {
+    background-position: 0% 40%;
+  }
+  100% {
+    background-position: 100% 60%;
+  }
+}
+
+.mesh {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: var(--circ-mesh-strength);
+  mix-blend-mode: screen;
+  animation: blob-float 22s ease-in-out infinite;
+}
+
+.mesh-1 {
+  width: min(52vw, 480px);
+  height: min(52vw, 480px);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgb(var(--circ-m1-r), var(--circ-m1-g), var(--circ-m1-b)),
+    transparent 62%
+  );
+  top: -8%;
+  left: -6%;
+  animation-delay: 0s;
+}
+
+.mesh-2 {
+  width: min(60vw, 560px);
+  height: min(60vw, 560px);
+  background: radial-gradient(
+    circle at 70% 40%,
+    rgb(var(--circ-m2-r), var(--circ-m2-g), var(--circ-m2-b)),
+    transparent 56%
+  );
+  bottom: -12%;
+  right: -8%;
+  animation-delay: -7s;
+  animation-duration: 26s;
+}
+
+.mesh-3 {
+  width: min(45vw, 420px);
+  height: min(45vw, 420px);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(var(--circ-m3-r), var(--circ-m3-g), var(--circ-m3-b)),
+    transparent 58%
+  );
+  top: 38%;
+  left: 28%;
+  opacity: calc(var(--circ-mesh-strength) * 0.72);
+  animation-delay: -12s;
+  animation-duration: 24s;
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(4%, 3%) scale(1.05);
+  }
+  66% {
+    transform: translate(-3%, 5%) scale(0.98);
+  }
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+/* Card shell: clear frame; each iframe uses `.card-frame` for the one glass surface */
+.glass-card {
+  position: relative;
+  min-height: 0;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+  transition: transform var(--transition-card);
+}
+
+.glass-card:hover {
+  transform: translateY(-1px);
+}
+
+.glass-card:focus-within {
+  border-color: transparent;
+}
+
+.card-iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+}

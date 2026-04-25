@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../css/card-base.css" />
+    <link rel="stylesheet" href="search.css" />
+  </head>
+  <body class="card-body--stretch">
+    <div class="card-frame search-card">
+      <form class="search-form" id="search-form" role="search" aria-label="Web search">
+        <label class="search-label visually-hidden" for="search-q">Search</label>
+        <div class="search-combo" id="search-combo">
+          <input
+            class="search-input"
+            id="search-q"
+            name="q"
+            type="search"
+            enterkeyhint="search"
+            autocomplete="off"
+          />
+          <button
+            type="button"
+            class="search-engine-trigger"
+            id="search-engine-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="search-engine-menu"
+            aria-label="Choose search engine"
+          >
+            <span class="search-engine-trigger-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 10l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+          <ul class="search-engine-menu" id="search-engine-menu" role="listbox" hidden></ul>
+        </div>
+      </form>
+    </div>
+    <script src="../../js/search.config.js"></script>
+    <script src="search.js" defer></script>
+  </body>
+</html>

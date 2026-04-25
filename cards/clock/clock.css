@@ -1,0 +1,28 @@
+/* Clock card — scoped to this iframe */
+
+body.card-body--end .clock-card {
+  justify-content: center;
+}
+
+.clock-card {
+  text-align: right;
+  width: 100%;
+}
+
+.clock-time {
+  display: block;
+  font-size: clamp(2.5rem, 6vw, 3.35rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.clock-date {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.02em;
+}
